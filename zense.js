@@ -13,7 +13,7 @@ function updateZense(e) {
     var form = this.form;
     var val = this.name;
     var options = {};
-    options.url = 'https://zense.olskjaer.dk/zenseonoff.php';
+    options.url = '/zenseonoff.php';
     options.type = 'post';
     options.beforeSend = function () {
       $("#progress").show();

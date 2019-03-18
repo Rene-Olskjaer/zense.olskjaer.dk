@@ -27,7 +27,7 @@ function updateZense(e) {
     var form = this.form;
     var val = this.name;
     var options = {};
-    options.url = 'https://zense.olskjaer.dk/list.php';
+    options.url = '/list.php';
     options.type = 'post';
     options.beforeSend = function () {
       $("#progress").show();

@@ -1,9 +1,12 @@
+Installer Apache+PHP+MySql - fungerer sikkert fint på RaspberryPi
+HUSK certifikat på webserver - Progressive Web Apps (PWA) kræver SSL forbindelse
 
 opret database+bruger:
 
-MariaDB [(none)]> create user 'zenseuser'@'localhost' identified by 'zensepassword';
-MariaDB [(none)]> create database zense;
-MariaDB [(none)]> grant all privileges on zense.* to 'zenseuser'@'localhost';
-MariaDB [(none)]> flush privileges;
-MariaDB [(none)]>
+MySQL [(none)]> create user 'zenseuser'@'localhost' identified by 'zensepassword';
+MySQL [(none)]> create database zense;
+MySQL [(none)]> grant all privileges on zense.* to 'zenseuser'@'localhost';
+MySQL [(none)]> flush privileges;
+MySQL [(none)]>
 
+Ret start url + scope i filen manifest.json 
