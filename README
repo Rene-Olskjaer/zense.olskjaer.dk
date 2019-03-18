@@ -1,0 +1,9 @@
+
+opret database+bruger:
+
+MariaDB [(none)]> create user 'zenseuser'@'localhost' identified by 'zensepassword';
+MariaDB [(none)]> create database zense;
+MariaDB [(none)]> grant all privileges on zense.* to 'zenseuser'@'localhost';
+MariaDB [(none)]> flush privileges;
+MariaDB [(none)]>
+
