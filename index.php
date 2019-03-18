@@ -200,7 +200,7 @@ function showstatus($ip, $port, $login)
 $login= htmlspecialchars($_COOKIE['BOXID']);
 $ip= htmlspecialchars($_COOKIE['IP']);
 $port= htmlspecialchars($_COOKIE['PORT']);
-$oldstate = htmlspecialchars(_COOKIE['STATE']);
+$oldstate = htmlspecialchars($_COOKIE['STATE']);
 $connected = updatestatus($ip, $port, $login);
 if ($connected == false) {echo '<script> setTimeout(function(){window.location = window.location}, 5000); </script>';};
 showstatus($ip, $port, $login);
