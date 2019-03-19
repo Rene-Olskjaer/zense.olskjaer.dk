@@ -1,11 +1,11 @@
 {
 "short_name":"ZenseHome",
 "name":"ZenseHome",
-"start_url":"https://CHANGE.ME/",
+"start_url":"https://zense.olskjaer.dk/",
 "display":"standalone",
 "background_color":"#000000",
 "theme_color":"#202020",
-"scope":"https://CHANGE.ME/",
+"scope":"https://zense.olskjaer.dk/",
 "icons":[
 {
 "src":"/images/windows10/Square71x71Logo.scale-400.png",
