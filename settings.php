@@ -30,7 +30,7 @@ function updateZense(e) {
     options.url = '/list.php';
     options.type = 'post';
     options.beforeSend = function () {
-      $("#progress").show();
+      if (this.name != 'rescan') $("#progress").show();
     };
     options.success = function(val) {
       window.location.reload(true);
