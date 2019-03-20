@@ -3,7 +3,7 @@ $DEBUG = true;
 
 function save($login, $u)
 {
-    $conn = new mysqli('localhost', 'root', '4mA-AF-e');
+    $conn = new mysqli($GLOBALS['mysqlserver'], $GLOBALS['user'], $GLOBALS['password']);
     mysqli_set_charset($conn, "utf8");
     $query = 'SELECT * from zense.box_' . $login;
     $result = mysqli_query($conn, $query);
