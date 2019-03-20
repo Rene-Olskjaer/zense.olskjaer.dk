@@ -132,7 +132,7 @@ function showstatus($ip, $port, $login)
     $conn = new mysqli($GLOBALS['mysqlserver'], $GLOBALS['user'], $GLOBALS['password']);
     mysqli_set_charset($conn, "utf8");
 
-    $query = "SELECT * from zense.box_".$login." where name NOT LIKE '%Bruges ikke%' ORDER BY room,type,name;";
+    $query = "SELECT * from zense.box_".$login." where name NOT LIKE '%Bruges ikke%' AND name not like '%Timeout%' ORDER BY room,type,name;";
     $result = mysqli_query($conn, $query);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {

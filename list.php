@@ -1,6 +1,6 @@
 <?php
 $DEBUG = true;
-
+require_once('setup/setup.php');
 function save($login, $u)
 {
     $conn = new mysqli($GLOBALS['mysqlserver'], $GLOBALS['user'], $GLOBALS['password']);
