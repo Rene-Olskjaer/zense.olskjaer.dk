@@ -1,12 +1,25 @@
-Installer Apache+PHP+MySql - fungerer sikkert fint på RaspberryPi
-HUSK certifikat på webserver - Progressive Web Apps (PWA) kræver SSL forbindelse
+installation på Raspberry-Pi (testet -ok) 
 
-opret database+bruger:
+# apt-get update –y
+# apt-get install git httpd mysql-server mysql-client php php-mysql php-mysqli –y
+# cd /var/www/html
+# git clone https://github.com/Rene-Olskjaer/zense.olskjaer.dk.git .
+# mysql
+MariaDB [(none)]> create user 'zenseuser'@'localhost' identified by 'zensepassword';
+Query OK, 0 rows affected (0.00 sec)
 
-MySQL [(none)]> create user 'zenseuser'@'localhost' identified by 'zensepassword';
-MySQL [(none)]> create database zense;
-MySQL [(none)]> grant all privileges on zense.* to 'zenseuser'@'localhost';
-MySQL [(none)]> flush privileges;
-MySQL [(none)]>
+MariaDB [(none)]> create database zense;
+Query OK, 1 row affected (0.12 sec)
+
+MariaDB [(none)]> grant all privileges on zense.* to 'zenseuser'@'localhost' ;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> exit
+Bye
+#
 
 Ret start url + scope i filen manifest.json 
+Installer certifikat
