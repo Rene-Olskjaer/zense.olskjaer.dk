@@ -1,3 +1,4 @@
+
 function attachCheckboxHandlers() {
     var el = document.getElementById('zense');
     var tops = el.getElementsByTagName('input');
