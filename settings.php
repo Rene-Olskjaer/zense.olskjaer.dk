@@ -10,7 +10,7 @@ header('Content-Type: text/html; charset=utf-8');
 <style>
 <?php include 'CSS/main.css'; ?>
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/jquery.min.js"></script>
 <script>
 function attachCheckboxHandlers() {
     var el = document.getElementById('zense');
