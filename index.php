@@ -6,7 +6,6 @@ require_once('setup/setup.php');
 <html lang=da>
 <head>
  <title>ZenseHome</title>
- <script src="sw-toolbox/companion.js" data-service-worker="sw.js"></script>
   <link rel="manifest" href="manifest/manifest.json">
 <meta name="description" content="ZenseHome">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,6 +25,7 @@ require_once('setup/setup.php');
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="zense.js"></script>
+
 </head>
 <body style="background-color:lightgrey;">
 
@@ -34,7 +34,20 @@ require_once('setup/setup.php');
        <img class=img src='images/ajax-loader.png' alt='loader'> 
    </div>
 </div>
-
+<script>
+  if ("serviceWorker" in navigator) {
+    if (navigator.serviceWorker.controller) {
+    } else {
+      navigator.serviceWorker
+      .register("sw.js", {
+      scope: "./"
+    })
+    .then(function (reg) {
+       console.log("Service worker has been registered for scope: " + reg.scope);
+      });
+    }
+  }
+</script>
 <script>      $("#progress").show(); </script>
 <?php
 class unit
@@ -195,7 +208,7 @@ function showstatus($ip, $port, $login)
             if ($dim==1) {
                  echo  '<th style="border:none;text-align: right; width:20%">';
  
-                  echo '<input name="'.$id.'" type="range"  min="0" max="100" value="'.$state.'" onmouseout="SetVal('.$id.',this.value)" onchange="SetVal('.$id.',this.value)">';
+                  echo '<input name="'.$id.'" type="range"  min="0" max="100" value="'.$state.'" onmouseout="SetVal('.$id.',this.value)" oninput="SetVal('.$id.',this.value)" onchange="SetVal('.$id.',this.value)">';
                   echo '</th>';
             } else {
               echo  '<th style="border:none;text-align: right; width:20%"> <label class="switch"> <input name="'.$id.'"';
