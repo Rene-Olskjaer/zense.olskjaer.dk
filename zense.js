@@ -37,9 +37,11 @@ function SetVal(id,val) {
     options.url = '/zenseonoff.php';
     options.type = 'post';
     if (val==0) {
-       options.data = {function2call: 'zenseoff',id:val};
+       console.log('zenseoff '+id);
+       options.data = {function2call: 'zenseoff',id:id};
     } else
     {
+       console.log('fade '+id+':'+val);
        options.data = {function2call: 'fade',val:val,id:id};
     }
     options.success = function () {

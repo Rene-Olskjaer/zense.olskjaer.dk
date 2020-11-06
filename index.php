@@ -195,7 +195,7 @@ function showstatus($ip, $port, $login)
             if ($dim==1) {
                  echo  '<th style="border:none;text-align: right; width:20%">';
  
-                  echo '<input name="'.$id.'" type="range"  min="0" max="100" value="'.$state.'" onmouseout="SetVal('.$id.',this.value)" oninput="SetVal('.$id.',this.value)" onchange="SetVal('.$id.',this.value)">';
+                  echo '<input name="'.$id.'" type="range"  min="0" max="100" value="'.$state.'" onmouseout="SetVal('.$id.',this.value)" onchange="SetVal('.$id.',this.value)">';
                   echo '</th>';
             } else {
               echo  '<th style="border:none;text-align: right; width:20%"> <label class="switch"> <input name="'.$id.'"';
