@@ -32,10 +32,6 @@ var click = function(e) {
 };
 
 var start = function(e) {
-    console.log(e);
-    var x = e.clientX, y = e.clientY,
-       elem = document.elementFromPoint(x, y);
-    console.log("ID:"+elem.id);
     if (e.type === "click" && e.button !== 0) {
         return;
     }
