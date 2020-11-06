@@ -37,5 +37,15 @@ function SetVal(id,val) {
     options.url = '/zenseonoff.php';
     options.type = 'post';
     options.data = {function2call: 'fade',val:val,id:id};
+    options.success = function () {
+            if (val==0) {
+              $("#"+id).attr('src','images/light_off.png');
+            } else {
+              $("#"+id).attr('src','images/light_on.png');
+
+            }
+
+
+        }
     $.ajax(options);
  };
