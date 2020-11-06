@@ -36,16 +36,19 @@ function SetVal(id,val) {
     var options = {};
     options.url = '/zenseonoff.php';
     options.type = 'post';
-    options.data = {function2call: 'fade',val:val,id:id};
+    if (val==0) {
+       options.data = {function2call: 'zenseoff',id:val};
+    } else
+    {
+       options.data = {function2call: 'fade',val:val,id:id};
+    }
     options.success = function () {
             if (val==0) {
-              $("#"+id).attr('src','images/light_off.png');
+              $("#"+id).attr('src','images/light_off-100.png');
             } else {
-              $("#"+id).attr('src','images/light_on.png');
+              $("#"+id).attr('src','images/light_on-100.png');
 
             }
-
-
         }
     $.ajax(options);
  };
