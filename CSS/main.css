@@ -20,6 +20,16 @@ tr:nth-child(even) {
   font-size: 20px;
   font-weight: bold;
 }
+#inputForm1{
+  border-radius: 18px;
+  background-color: lightblue;
+  padding: 20px;
+  width: 300px;
+  height: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .top{position: fixed; width: 100%; top: 0; height: 60px; background: #3EA5C4; color: black;z-index:1;}
 .push{margin-top:80px; margin-bottom: 80px; z-index:2;}
 .switch {
@@ -109,3 +119,30 @@ html,body {
   box-sizing: border-box;
   margin: auto;
 }
+
+
+
+input[type="range"] { 
+    margin: auto;
+    -webkit-appearance: none;
+    position: relative;
+    overflow: hidden;
+    height: 30px;
+    width: 120px;
+    cursor: pointer;
+  border-radius: 34px;
+  /*  border-radius: 0; *//* iOS */
+}
+::-webkit-slider-runnable-track {
+    background: #2196F3;
+}
+::-webkit-slider-thumb {
+    -webkit-appearance: none;
+      width: 20px;  
+      height: 40px; 
+    background: #fff;
+    box-shadow: -100vw 0 0 100vw dodgerblue;
+    border: 0px solid #999; /* 1 */
+
+}
+

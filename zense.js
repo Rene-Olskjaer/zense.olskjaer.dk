@@ -29,5 +29,13 @@ function updateZense(e) {
        options.data = {function2call: 'zenseoff',id:val};
     }
     $.ajax(options);
- };
+ }
 
+function SetVal(id,val) {
+    var form = this.form;
+    var options = {};
+    options.url = '/zenseonoff.php';
+    options.type = 'post';
+    options.data = {function2call: 'fade',val:val,id:id};
+    $.ajax(options);
+ };

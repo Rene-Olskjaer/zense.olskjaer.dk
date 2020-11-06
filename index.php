@@ -45,6 +45,7 @@ class unit
     public $name;
     public $room;
     public $floor;
+    public $dim;
 }
 
 function updatestatus($ip, $port, $login)
@@ -63,6 +64,7 @@ function updatestatus($ip, $port, $login)
             $x->name = $row["name"];
             $x->room = $row["room"];
             $x->floor = $row["floor"];
+            $x->dim = $row["dim"];
             array_push($u, $x);
         }
     }
@@ -91,6 +93,15 @@ function updatestatus($ip, $port, $login)
            $a = 1 << $cnt;
            $cnt++;
            $newstate = ($state & $a) ? 100 : 0;
+           if ($t->dim  == true) {
+              fputs($fp, ">>Get ".$t->id."<<\r");
+              $tmp = fgets($fp);
+       	      $tmp = str_replace("Get ", "", $tmp);
+              $tmp = str_replace("<<", "", $tmp);
+              $tmp = str_replace(">>", "", $tmp);
+              $tmp = trim(str_replace("0x", "", $tmp));
+              $newstate=$tmp;
+           }
            $query = 'UPDATE zense.box_'.$login.' SET state = '.$newstate.' WHERE id = '.$t->id.';';
            mysqli_query($conn, $query);
            mysqli_commit($conn);
@@ -101,6 +112,7 @@ function updatestatus($ip, $port, $login)
         return true;
     } else return false;
     $conn->close();
+  
 }
 
 function showstatus($ip, $port, $login)
@@ -127,7 +139,7 @@ function showstatus($ip, $port, $login)
     echo '</div>';
  
     echo '<div class="push">';
-    echo '<table style="width:100%; border: 1px solid #CCC; border-collapse: collapse;">';
+    echo '<table id="thetable" style="width:100%; border: 1px solid #CCC; border-collapse: collapse;">';
  
     $conn = new mysqli($GLOBALS['mysqlserver'], $GLOBALS['user'], $GLOBALS['password']);
     mysqli_set_charset($conn, "utf8");
@@ -145,45 +157,54 @@ function showstatus($ip, $port, $login)
                 echo  '<tr style="background-color:lightblue;"><th colspan="3">'.$room.'</th></tr>';
                 $oldroom = $room;
             }
+            $dim=$row["dim"];
             echo '<tr>';
             switch ($type) {
            case 1:
              if ($state==0) {
-                 echo '<th style="border:none;"><img src="images/light_off-100.png" alt="off" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/light_off-100.png" alt="off" style="width:60%;"></th>';
              } else {
-                 echo '<th style="border:none;"><img src="images/light_on-100.png" alt="on" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/light_on-100.png" alt="on" style="width:60%;"></th>';
              }
              break;
            case 4:
              if ($state==0) {
-                 echo '<th style="border:none;"><img src="images/zensehome-stikkontakt-off-100.png" alt="off" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/zensehome-stikkontakt-off-100.png" alt="off" style="width:60%;"></th>';
              } else {
-                 echo '<th style="border:none;"><img src="images/zensehome-stikkontakt-on-100.png" alt="on" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/zensehome-stikkontakt-on-100.png" alt="on" style="width:60%;"></th>';
              }
              break;
            case 18829:
              if ($state==0) {
-                 echo '<th style="border:none;"><img src="images/zensehome-stikkontakt-off-100.png" alt="off" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/zensehome-stikkontakt-off-100.png" alt="off" style="width:60%;"></th>';
              } else {
-                 echo '<th style="border:none;"><img src="images/zensehome-stikkontakt-on-100.png" alt="on" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/zensehome-stikkontakt-on-100.png" alt="on" style="width:60%;"></th>';
              }
              break;
            case 108:
              if ($state==0) {
-                 echo '<th style="border:none;"><img src="images/uniudtag-med-skygge-off-100.png" alt="off" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/uniudtag-med-skygge-off-100.png" alt="off" style="width:60%;"></th>';
              } else {
-                 echo '<th style="border:none;"><img src="images/uniudtag-med-skygge-on-100.png" alt="on" style="width:60%;"></th>';
+                 echo '<th style="border:none;"><img id="'.$id.'"src="images/uniudtag-med-skygge-on-100.png" alt="on" style="width:60%;"></th>';
              }
              break;
            default:
-             echo '<th style="border:none;">unknown</th>';
+             echo '<th id="'.$id.'" style="border:none;">unknown</th>';
            }
             echo '<th style="border:none;text-align: left; font-size:x-large;">'. $name.'</th>';
-            echo  '<th style="border:none;text-align: right; width:20%"> <label class="switch"> <input name="'.$id.'"';
-            if ($state>0) {
-                echo  ' type="checkbox" checked> <span class="slider round"></span></label></th>';
+            if ($dim==1) {
+                 echo  '<th style="border:none;text-align: right; width:20%">';
+ 
+                  echo '<input name="'.$id.'" type="range"  min="0" max="100" value="'.$state.'" onmouseout="SetVal('.$id.',this.value)" oninput="SetVal('.$id.',this.value)" onchange="SetVal('.$id.',this.value)">';
+                  echo '</th>';
             } else {
-                echo  ' type="checkbox" > <span class="slider round"></span></label></th>';
+              echo  '<th style="border:none;text-align: right; width:20%"> <label class="switch"> <input name="'.$id.'"';
+              if ($state>0) {
+                echo  ' type="checkbox" checked> <span class="slider round"></span></label>';
+                echo '</th>';
+              } else {
+                  echo  ' type="checkbox" > <span class="slider round"></span></label></th>';
+              }
             }
 
             echo '</tr>';
@@ -208,4 +229,6 @@ function showstatus($ip, $port, $login)
 <script> $("#progress").hide(); </script>
 
 </body>
+<script src="longpress.js"></script>
+
 </html>

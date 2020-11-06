@@ -120,17 +120,17 @@ if (isset($_POST['settings_x'])) {
     echo '</tr>';
     echo '<tr>';
     echo '<th style="text-align: left; font-size:xx-large;">IP/Hostname</th>';
-    echo  '<th style="text-align: right; width:20%"> <input type="text" name="ip" value='.$ip.' id="inputForm"></th>';
+    echo  '<th style="text-align: right; width:20%"> <input type="text" name="ip" value="'.$ip.'" id="inputForm"></th>';
 
     echo '</tr>';
     echo '<tr>';
     echo '<th style="text-align: left; font-size:xx-large;">Port</th>';
-    echo  '<th style="text-align: right; width:20%"> <input type="text" name="port" value='.$port.' id="inputForm"></th>';
+    echo  '<th style="text-align: right; width:20%"> <input type="text" name="port" value="'.$port.'" id="inputForm"></th>';
 
     echo '</tr>';
     echo '<tr>';
     echo '<th style="text-align: left; font-size:xx-large;">PC-Box Id</th>';
-    echo  '<th style="text-align: right; width:20%"> <input type="text" name="login" value='.$login.' id="inputForm"></th>';
+    echo  '<th style="text-align: right; width:20%"> <input type="text" name="login" value="'.$login.'" id="inputForm"></th>';
 
     echo '</tr>';
     echo '</table>';
