@@ -60,7 +60,7 @@ if (isset($_POST['list_x'])) {
     $ip= htmlspecialchars($_COOKIE['IP']);
     $port= htmlspecialchars($_COOKIE['PORT']);
     $login= htmlspecialchars($_COOKIE['BOXID']);
-  
+
     $fp = pfsockopen($ip, $port);
     if ($fp) {
         fputs($fp, '>>Login ' . $login . '<<\r');
@@ -110,7 +110,7 @@ if (isset($_POST['list_x'])) {
 
 if (isset($_POST['settings_x'])) {
     $ip= htmlspecialchars($_COOKIE['IP']);
-    $port= htmlspecialchars($_COOKIE['PORT']);
+    $port = (int)($_COOKIE['PORT'] ?? 0);
     $login= htmlspecialchars($_COOKIE['BOXID']);
     echo '<form settings.php" method="post">';
     echo '<table style="width:100%">';
@@ -149,5 +149,3 @@ if (isset($_POST['save_x'])) {
 
 </body>
 </html>
-
-
