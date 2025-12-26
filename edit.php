@@ -50,7 +50,7 @@ function edit($ip, $port, $login, $id)
     echo '<th style="text-align: left; font-size:xx-large;">Floor</th>';
     echo  '<th style="text-align: right; width:20%"> <input type="text" name="floor" value='.$floor.' id="inputForm1"></th>';
     echo '</tr>';
-   
+
     echo '<tr>';
     echo '<th style="text-align: left; font-size:xx-large;">Room</th>';
     echo  '<th style="text-align: right; width:20%"> <input type="text" name="room" value='.$room.' id="inputForm1"></th>';
@@ -72,14 +72,16 @@ function edit($ip, $port, $login, $id)
 
      echo '</table>';
     echo '</form>';
- 
-  
+
+
 }
 
-   $login= htmlspecialchars($_COOKIE['BOXID']);
-   $ip= htmlspecialchars($_COOKIE['IP']);
-   $port= htmlspecialchars($_COOKIE['PORT']);
-   $oldstate = htmlspecialchars($_COOKIE['STATE']);
+
+$login = $_COOKIE['BOXID'] ?? '';
+$ip    = $_COOKIE['IP'] ?? '';
+$port  = (int)($_COOKIE['PORT'] ?? 0);
+$oldstate = (int)($_COOKIE['STATE'] ?? 0);
+
 
 if (isset($_POST['save_x'])) {
     $conn = new mysqli($GLOBALS['mysqlserver'], $GLOBALS['user'], $GLOBALS['password']);
