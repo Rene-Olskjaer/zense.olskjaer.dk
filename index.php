@@ -8,18 +8,18 @@ require_once('setup/setup.php');
  <title>ZenseHome</title>
   <link rel="manifest" href="manifest/manifest.json">
 <meta name="description" content="ZenseHome">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="ZenseHome">
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <meta name="theme-color" content="#ffffff">
-<link rel="apple-touch-icon" href="images/ios/ios-appicon-120-120.png"> 
-<link rel="apple-touch-icon" sizes="180x180" href="images/ios/ios-appicon-180-180.png">  
-<link rel="apple-touch-icon" sizes="152x152" href="images/ios/ios-appicon-152-152.png">  
-<link rel="apple-touch-icon" sizes="167x167" href="images/ios/ios-appicon-152-152.png">  
-<link rel="icon" type="image/png" href="images/chrome/chrome-favicon-16-16.png" sizes="16x16">  
-<link rel="icon" type="image/png" href="images/firefox/firefox-general-32-32.png" sizes="32x32">  
-<link rel="icon" type="image/png" href="images/android/android-launchericon-96-96.png" sizes="96x96">  
+<link rel="apple-touch-icon" href="images/ios/ios-appicon-120-120.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/ios/ios-appicon-180-180.png">
+<link rel="apple-touch-icon" sizes="152x152" href="images/ios/ios-appicon-152-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="images/ios/ios-appicon-152-152.png">
+<link rel="icon" type="image/png" href="images/chrome/chrome-favicon-16-16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="images/firefox/firefox-general-32-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/android/android-launchericon-96-96.png" sizes="96x96">
 <style>
   <?php include 'CSS/main.css'; ?>
 </style>
@@ -31,7 +31,7 @@ require_once('setup/setup.php');
 
 <div class=fadeMe id='progress' style='display:none'>
    <div class=container>
-       <img class=img src='images/ajax-loader.png' alt='loader'> 
+       <img class=img src='images/ajax-loader.png' alt='loader'>
    </div>
 </div>
 <script>
@@ -96,7 +96,7 @@ function updatestatus($ip, $port, $login)
         #file_put_contents('zense.log','Antal:'. count($u) . "\r\n",FILE_APPEND);
         setcookie('STATE', $state);
         $cnt = 0;
-        if (count($u)>31) { 
+        if (count($u)>31) {
             $hi=$state >> 32;
             $lo=$state & 0xFFFFFFFF;
             $state=$lo*0x100000000+$hi;
@@ -109,7 +109,7 @@ function updatestatus($ip, $port, $login)
            if ($t->dim  == true) {
               fputs($fp, ">>Get ".$t->id."<<\r");
               $tmp = fgets($fp);
-       	      $tmp = str_replace("Get ", "", $tmp);
+              $tmp = str_replace("Get ", "", $tmp);
               $tmp = str_replace("<<", "", $tmp);
               $tmp = str_replace(">>", "", $tmp);
               $tmp = trim(str_replace("0x", "", $tmp));
@@ -125,7 +125,7 @@ function updatestatus($ip, $port, $login)
         return true;
     } else return false;
     $conn->close();
-  
+
 }
 
 function showstatus($ip, $port, $login)
@@ -145,15 +145,15 @@ function showstatus($ip, $port, $login)
     } else {
        echo '<th style="border:none;text-align: center; font-size:x-large;">Ingen forbindelse</th>';
     }
- 
+
     echo '<th style="border:none;text-align: right"><input type="image" src="images/list.png" alt="list" name="list" width="50" height="50"></th>';
     echo '</tr>';
     echo '</table>';
     echo '</div>';
- 
+
     echo '<div class="push">';
     echo '<table id="thetable" style="width:100%; border: 1px solid #CCC; border-collapse: collapse;">';
- 
+
     $conn = new mysqli($GLOBALS['mysqlserver'], $GLOBALS['user'], $GLOBALS['password']);
     mysqli_set_charset($conn, "utf8");
 
@@ -207,7 +207,7 @@ function showstatus($ip, $port, $login)
             echo '<th style="border:none;text-align: left; font-size:x-large;">'. $name.'</th>';
             if ($dim==1) {
                  echo  '<th style="border:none;text-align: right; width:20%">';
- 
+
                   echo '<input name="'.$id.'" type="range"  min="0" max="100" value="'.$state.'" onmouseout="SetVal('.$id.',this.value)" oninput="SetVal('.$id.',this.value)" onchange="SetVal('.$id.',this.value)">';
                   echo '</th>';
             } else {
@@ -231,10 +231,13 @@ function showstatus($ip, $port, $login)
     echo 'attachCheckboxHandlers();';
     echo '</script>';
 }
-   $login= htmlspecialchars($_COOKIE['BOXID']);
-   $ip= htmlspecialchars($_COOKIE['IP']);
-   $port= htmlspecialchars($_COOKIE['PORT']);
-   $oldstate = htmlspecialchars($_COOKIE['STATE']);
+
+
+   $login = $_COOKIE['BOXID'] ?? '';
+   $ip    = $_COOKIE['IP'] ?? '';
+   $port  = (int)($_COOKIE['PORT'] ?? 0);
+   $oldstate = (int)($_COOKIE['STATE'] ?? 0);
+
    $connected = updatestatus($ip, $port, $login);
    if ($connected == false) {echo '<script> setTimeout(function(){window.location = window.location}, 5000); </script>';};
    showstatus($ip, $port, $login);
